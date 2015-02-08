@@ -1,0 +1,8 @@
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      title: "Android SVG Icon template"
+encoding: utf-8

@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>{{page.title}}</title>
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic' rel='stylesheet' type='text/css'>
+
+    <style media="screen">
+      body {
+        font-family: "Roboto",sans-serif;
+        background: #f9f9f9;
+        width: 50%;
+        margin: 25pt 25%;
+      }
+
+      hr {
+        display: none;
+      }
+
+      h1 {
+        color: #009688;
+        font-size: 34px;
+        font-weight: 400;
+        padding-top: 80px;
+      }
+
+      h2 {
+        color: #009688;
+        font-size: 24px;
+        font-weight: normal;
+        padding-top: 48px;
+      }
+
+      p {
+        color: #212121;
+        font-size: 13px;
+      }
+
+      a {
+        color: #009688;
+        text-decoration: none;
+      }
+
+      ul {
+        color: #757575;
+        font-size: 13px;
+      }
+
+      img {
+        border: 1px solid #E0E0E0;
+        float: right;
+        padding: 10pt;
+        width: 50%;
+        margin-left: 10%;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    {{page.content | markdownify}}
+  </body>
+</html>
