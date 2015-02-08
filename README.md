@@ -26,3 +26,21 @@ The square example product icon from [Android Icon Design guidelines](http://www
  * Radial gradient finish
  * Inkscape layers
  * Square and diagonal grids for Inkscape
+
+
+
+Long Shadow
+-----------
+
+[![Long shadow icon](http://aeirola.github.io/android-svg-icon-template/long_shadow.svg)](https://github.com/aeirola/android-svg-icon-template/blob/gh-pages/long_shadow.svg?short_path=561cadd)
+
+Long shadows aren't part of the official guidelines, but are widely used in both Google and trhird party icons.
+
+  * 48x48dp dimensions
+  * 152x152px square keyline shape background element
+  * Coloured round foreground element
+  * Diagonal tint and shade effects
+  * Long shadow effect
+  * Radial gradient finish
+  * Inkscape layers
+  * Square and diagonal grids for Inkscape

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-  SVG template from the Android system icon style guide reference square icon
-  http://www.google.com/design/spec/style/icons.html#icons-product-icons
+  SVG template for icons with material elements that cast long shadows. The
+  filter for the long shadow only works for diagonally symmetric simple
+  elements, and requires a bit of tweaking when changing the element size.
 
   This file contains additional metadata for use with Inkscape, such as layers
   and grids. This means that you can use the file directly with Inkscape, with
@@ -86,8 +87,8 @@
          result="floodTintColor" />
       <feOffset
          in="SourceAlpha"
-         dx="0"
-         dy="1"
+         dx="0.5"
+         dy="0.5"
          result="offsetAlpha">
         <!--
           The style guideline metrics specify the y offset to be 1dp, but
@@ -129,8 +130,8 @@
          result="floodShadeColor" />
       <feOffset
          in="SourceAlpha"
-         dy="-1"
-         dx="0"
+         dy="-0.5"
+         dx="-0.5"
          result="offsetAlpha" />
       <feComposite
          in="SourceAlpha"
@@ -149,18 +150,16 @@
          result="shade" />
     </filter>
     <filter
-       id="filterShadow"
-       inkscape:label="Drop Shadow"
+       id="filterLongShadow"
+       inkscape:label="Long shadow"
        width="2"
        height="2"
-       x="-0.5"
-       y="-0.5">
-      <!--
-        Filter used to produce the blurred shadow below material elements.
-
-        Edit the flood-color attribute in the feFlood element below to
-        change the shadow color. To edit the shadow size and offset, change
-        the attributes in the feGaussianBlur and feOffset elements. -->
+       x="0"
+       y="0">
+       <!--
+        Filter for casting long shadow. Uses an external linear gradient that
+        is rendered outside the viewBox for streching the image using a
+        displacement map. -->
       <feFlood
          flood-opacity="0.2"
          flood-color="#212121"
@@ -169,25 +168,48 @@
          in="floodShadowColor"
          in2="SourceAlpha"
          operator="in"
-         result="shadow" />
-      <feGaussianBlur
-         in="shadow"
-         stdDeviation="1.5"
-         result="bluredShadow" />
-      <feOffset
-         in="bluredShadow"
-         dx="0"
-         dy="1.5"
-         result="offsetShadow" />
-      <feComposite
+         result="plainShadow" />
+      <feImage
+         xlink:href="#rectLongShadowGradient"
+         result="shadowGradient" />
+      <feDisplacementMap
+         in="plainShadow"
+         in2="shadowGradient"
+         xChannelSelector="A"
+         yChannelSelector="A"
+         scale="26"
+         result="longShadow" />
+      <feBlend
          in="SourceGraphic"
-         in2="offsetShadow"
-         operator="over"
-         result="dropShadow" />
+         in2="longShadow"
+         mode="normal" />
     </filter>
+    <linearGradient
+       id="linearGradientHalfOpcity">
+      <stop
+         offset="0"
+         id="stopHalfOpcityBegin"
+         style="stop-opacity:0.5" />
+      <stop
+         offset="1"
+         id="stopHalfOpcityEnd"
+         style="stop-opacity:0" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradientHalfOpcity"
+       id="linearGradientLongShadow"
+       x1="10"
+       y1="10"
+       x2="23"
+       y2="23"
+       gradientUnits="userSpaceOnUse">
+      <!--
+        The positioning of the gradient stops needs to match the size of the
+        element casting the shadow. -->
+    </linearGradient>
   </defs>
   <sodipodi:namedview
-     showgrid="true">
+     showguides="true">
     <!--
       This defines the grids shown in Inkscape.
       These won't affect the result of the render. -->
@@ -209,6 +231,20 @@
        spacingy="48"
        enabled="true" />
   </sodipodi:namedview>
+  <g
+     id="auxiaryElements"
+     transform="translate(0,100)">
+    <!--
+      Generating the shadow requires a linear gradient as a source, we don't
+      this is stored outside of the viewBox, but needs to be rendered. -->
+    <rect
+       id="rectLongShadowGradient"
+       style="fill:url(#linearGradientLongShadow)"
+       width="48"
+       height="48"
+       x="0"
+       y="0" />
+  </g>
   <!--
     The following groups contain the actual visible parts of the image.
     The groups should be clipped with the silhouette path so that any shadows
@@ -242,15 +278,17 @@
      inkscape:label="Material foreground"
      clip-path="url(#clipSilhouette)">
     <g
-       style="filter:url(#filterShadow)">
+       style="filter:url(#filterLongShadow)">
       <g
          style="filter:url(#filterShade)">
-        <rect
-           style="fill:#F5F5F5;filter:url(#filterTint)"
-           width="26"
-           height="26"
-           x="11"
-           y="11" />
+        <circle
+           style="fill:#FF9800;filter:url(#filterTint)"
+           cx="24"
+           cy="24"
+           r="10" />
+        <!--
+          If you change the element size, you'll probably need to change the
+          shadow gradient aswell. -->
       </g>
     </g>
   </g>
